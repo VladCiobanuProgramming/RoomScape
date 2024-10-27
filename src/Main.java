@@ -4,12 +4,44 @@ import java.util.Random;
 public class Main {
     public static void main(String[] args) {
         Random rand = new Random(); // Integrating 'random numbers' function
-        int HP = 75; // Player Initial Health Points
+        int HP; // Player Initial Health Points
         int RoomsTravelled=0; // How many rooms player travelled
         int coinCurrency = 0; // Player starting coins amount
+        int InitialMonsterHP; // Intial monster HP (chosen by difficulty)
+        int MonsterHP; // Monster's HP
+        String UserDifficultyOption;
+        Scanner scanner = new Scanner(System.in); // Integrating scanner type as user input
+        Scanner scanner2=new Scanner(System.in); // Integrating scanner2 type as 2nd user input
+        System.out.println("Please pick a difficulty . Easy , Medium , Hard.");
+        System.out.println("Easy - 100 HP. Monster HP - 20.");
+        System.out.println("Medium - 75 HP. Monster HP - 35");
+        System.out.println("Hard - 50 HP . Monster HP - 50");
+        while(true){
+            UserDifficultyOption=scanner2.nextLine().toLowerCase();
+            if(UserDifficultyOption.equals("easy")){
+                HP=100;
+                InitialMonsterHP=20;
+                MonsterHP=20;
+                break;
+            }
+            if(UserDifficultyOption.equals("medium")){
+                HP=75;
+                InitialMonsterHP=35;
+                MonsterHP=35;
+                break;
+            }
+            if(UserDifficultyOption.equals("hard")){
+                HP=50;
+                InitialMonsterHP=50;
+                MonsterHP=50;
+                break;
+            }
+            else{
+                System.out.println("Please pick a valid difficulty opinion.");
+            }
+        }
         System.out.println("Welcome to RoomScape!"); // Greet player
         System.out.println("You start with a HP of " + HP + "\n");
-        Scanner scanner = new Scanner(System.in); // Integrating scanner type as user input
 
         while (HP > 0) { // While player has more than 0 HP (Player is alive)
             // Room Layout
@@ -53,7 +85,6 @@ public class Main {
 
             if (RandEvent == 2) { // Player encountered enemy
                 System.out.printf("You encountered a Monster! Fight or Flight?\n");
-                int MonsterHP = 20; // Monster's HP
                 String userDecision;
 
                 // Flight or fight decision loop
@@ -63,6 +94,7 @@ public class Main {
 
                     if (userDecision.equals("flight") && FlightChance == 0) { // 25% chance for player to flee each time flight is picked
                         System.out.printf("You ran away successfully.\n");
+                        MonsterHP=InitialMonsterHP;
                         break; // Exit the loop if fleeing is successful
                     } else if (userDecision.equals("flight")) { // unsuccessful flight attempt
                         int TakenAttackDamage = rand.nextInt(20) + 1; // Damage monster will deal
@@ -80,6 +112,7 @@ public class Main {
                         System.out.printf("Monster now has %d HP left!\n", MonsterHP); // Displays monster HP after both player and monster attack
                         HP -= TakenAttackDamage;
                         System.out.printf("You now have %d HP remaining.\n", HP); // Displays Player HP after both player and monster attack
+                        System.out.println("Fight or flight ?");
 
                     } else {
                         System.out.printf("Invalid decision. Please choose 'Fight' or 'Flight'.\n"); // Input !=fight or flight
@@ -89,16 +122,18 @@ public class Main {
                     System.out.printf("\n ----------------\n");
                     System.out.println("You have been defeated by the monster. Game Over!");
                     System.out.printf("In your adventure you have gathered "+coinCurrency+" coins.\n");
-                    System.out.printf("In your adventure you have travelled "+RoomsTravelled+" rooms.");
+                    System.out.printf("In your adventure you have travelled "+RoomsTravelled+" rooms.\n");
                 }
 
                 if (MonsterHP <= 0) {
-                    System.out.printf("\n ---------------- Congrats !\n");
-                    System.out.println("You have defeated the monster!");
+                    System.out.println("\n---------------- Congrats ! You have defeated the monster!");
+                    System.out.printf("You have %d HP remaining.\n" , HP);
+                    MonsterHP=InitialMonsterHP;
                 }
             }
         }
 
         scanner.close(); // Close the scanner at the end
+        scanner2.close();
     }
 }
