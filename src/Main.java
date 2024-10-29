@@ -14,9 +14,9 @@ public class Main {
         Scanner scanner = new Scanner(System.in); // Integrating scanner type as user input
         Scanner scanner2=new Scanner(System.in); // Integrating scanner2 type as 2nd user input
         System.out.println("Please pick a difficulty . Easy , Medium , Hard.");
-        System.out.println("\u001b[32;1mEasy - 100 HP. Monster HP - 20.\u001b[0m");
-        System.out.println("\u001b[33;1mMedium - 75 HP. Monster HP - 35\u001b[33;1m");
-        System.out.println("\u001b[31;1mHard - 50 HP . Monster HP - 50\u001b[0m");
+        System.out.println("Easy - 100 HP. Monster HP - 20.");
+        System.out.println("Medium - 75 HP. Monster HP - 35.");
+        System.out.println("Hard - 50 HP . Monster HP - 50.");
         while(true){
             UserDifficultyOption=scanner2.nextLine().toLowerCase();
             if(UserDifficultyOption.equals("easy")){
@@ -41,16 +41,16 @@ public class Main {
                 System.out.println("Please pick a valid difficulty opinion.");
             }
         }
-        System.out.println("Welcome to \u001b[36;1mRoomScape!\u001b[0m"); // Greet player
+        System.out.println("Welcome to RoomScape!"); // Greet player
         System.out.println("You start with a HP of " + HP + "\n");
 
         while (HP > 0) { // While player has more than 0 HP (Player is alive)
             // Room Layout
             String RoomOutput = """
-                      |--------\u001b[36;1mFront\u001b[0m-------|
+                      |--------Front-------|
                       |                    |
                       |                    |
-                    \u001b[36;1mleft\u001b[0m                  \u001b[36;1mright\u001b[0m
+                    left                  right
                       |                    |
                       |____________________|""";
             System.out.println(RoomOutput);
@@ -85,7 +85,7 @@ public class Main {
             }
 
             if (RandEvent == 2) { // Player encountered enemy
-                System.out.printf("You encountered a Monster! \u001b[31;1mFight\u001b[0m or \u001b[32;1mFlight\u001b[0m?\n");
+                System.out.printf("You encountered a Monster! Fight or Flight?\n");
                 String userDecision;
 
                 // Flight or fight decision loop
@@ -94,12 +94,12 @@ public class Main {
                     userDecision = scanner.nextLine().toLowerCase(); // user input to lowercase
 
                     if (userDecision.equals("flight") && FlightChance == 0) { // 25% chance for player to flee each time flight is picked
-                        System.out.printf("You ran away \u001b[32;1msuccessfully\u001b[0m.\n");
+                        System.out.printf("You ran away successfully.\n");
                         MonsterHP=InitialMonsterHP;
                         break; // Exit the loop if fleeing is successful
                     } else if (userDecision.equals("flight")) { // unsuccessful flight attempt
                         int TakenAttackDamage = rand.nextInt(20) + 1; // Damage monster will deal
-                        System.out.printf("Fleeing \u001b[31;1munsuccessful\u001b[0m. Monster hit you for -%d HP!\n", TakenAttackDamage);
+                        System.out.printf("Fleeing unsuccessful. Monster hit you for -%d HP!\n", TakenAttackDamage);
                         HP -= TakenAttackDamage;
                         System.out.printf("You now have %d HP remaining.\n", HP);
                     } else if (userDecision.equals("fight")) { // Player decides to fight back
@@ -122,13 +122,13 @@ public class Main {
                 if (HP <= 0) {  // Player died , Player end stats
                     System.out.printf("\n ----------------\n");
                     System.out.println("You have been defeated by the monster. Game Over!");
-                    System.out.printf("\u001b[36;1mIn your adventure you have gathered\u001b[0m "+coinCurrency+" coins.\n");
-                    System.out.printf("\u001b[36;1mIn your adventure you have travelled\u001b[0m "+RoomsTravelled+" rooms.\n");
+                    System.out.printf("In your adventure you have gathered "+coinCurrency+" coins.\n");
+                    System.out.printf("In your adventure you have travelled "+RoomsTravelled+" rooms.\n");
                 }
 
                 if (MonsterHP <= 0) {
-                    System.out.println("\n---------------- \u001b[33;1mCongrats\u001b[0m ! You have defeated the monster!");
-                    System.out.printf("You have %d \u001b[32;1mHP\u001b[0m remaining.\n" , HP);
+                    System.out.println("\n---------------- Congrats ! You have defeated the monster!");
+                    System.out.printf("You have %d HP remaining.\n" , HP);
                     MonsterHP=InitialMonsterHP;
                 }
             }
