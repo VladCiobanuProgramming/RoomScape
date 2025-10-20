@@ -1,4 +1,4 @@
-Deleted most of the ReadME cause it was AI slop just play the game and go through the rooms.
+Deleted most of the ReadME cause it was AI slop just fight monsters as you go through rooms
 
 ### Steps to Compile and Run
 
